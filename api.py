@@ -1,14 +1,14 @@
-from flask import Flask, request, jsonify, send_file, render_template
+import base64
+import pickle
 import re
 from io import BytesIO
 
+import matplotlib.pyplot as plt
+import pandas as pd
+from flask import Flask, jsonify, render_template, request, send_file
 # nltk.download('stopwords')
 from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
-import matplotlib.pyplot as plt
-import pandas as pd
-import pickle
-import base64
 
 STOPWORDS = set(stopwords.words("english"))
 
