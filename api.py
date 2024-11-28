@@ -1,19 +1,22 @@
-import base64
-import pickle
+from flask import Flask, request, jsonify, send_file, render_template
+from flask_cors import CORS
 import re
 from io import BytesIO
-
+import matplotlib
 import matplotlib.pyplot as plt
-import pandas as pd
-from flask import Flask, jsonify, render_template, request, send_file
+
 # nltk.download('stopwords')
 from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
+import matplotlib.pyplot as plt
+import pandas as pd
+import pickle
+import base64
 
 STOPWORDS = set(stopwords.words("english"))
 
 app = Flask(__name__)
-
+CORS(app)
 
 @app.route("/test", methods=["GET"])
 def test():
@@ -129,9 +132,13 @@ def get_distribution_graph(data):
         ylabel="",
     )
 
+    # Save the figure to BytesIO
     graph = BytesIO()
     plt.savefig(graph, format="png")
-    plt.close()
+    plt.close()  # Always close to release resources
+
+    # Reset the pointer to the beginning of the BytesIO object
+    graph.seek(0)
 
     return graph
 

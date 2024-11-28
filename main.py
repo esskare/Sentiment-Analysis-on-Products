@@ -1,3 +1,4 @@
+
 import streamlit as st
 import pandas as pd
 import requests
@@ -9,7 +10,8 @@ prediction_endpoint = "http://127.0.0.1:5000/predict"
 st.title("Text Sentiment Predictor")
 
 uploaded_file = st.file_uploader(
-    "Choose a CSV file for bulk prediction - Upload the file and click on Predict",
+    "Choose a CSV file for bulk prediction - \
+    Upload the file and click on Predict",
     type="csv",
 )
 
@@ -27,7 +29,7 @@ if st.button("Predict"):
         st.download_button(
             label="Download Predictions",
             data=response_bytes,
-            file_name="Predictions.csv",
+            file_name="New Predictions.csv",
             key="result_download_button",
         )
 
